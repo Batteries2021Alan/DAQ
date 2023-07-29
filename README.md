@@ -1,2 +1,2 @@
 # DAQ
-Sistea de adquisición y validacion de datos
+Sistema de adquisición y validacion de datos
