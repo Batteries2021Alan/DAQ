@@ -1,5 +1,0 @@
-#include <string>
-
-int main(){
-	cout << "Bounjour, monde!" << endl;
-}
