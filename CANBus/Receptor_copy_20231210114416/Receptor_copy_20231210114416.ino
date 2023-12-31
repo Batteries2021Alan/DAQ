@@ -83,6 +83,6 @@ void loop() {
   }
      }
   else{
-    Serial.println("No entra");
+    //Serial.println("No entra");
   }
 }

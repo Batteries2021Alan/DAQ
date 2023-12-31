@@ -31,7 +31,7 @@ struct can_frame SensorAnalogico12562::construirTrama(){
 void SensorAnalogico12562::arreglar(){
     dato=leer();
     d1=int(dato);// Maximo de 256
-    d2= int((dato-d1)*100);//.99
+    //d2= int((dato-d1)*100);//.99
     datosBin[0]=d1;
     datosBin[1]=d2;
     datosBin[2]=d3;

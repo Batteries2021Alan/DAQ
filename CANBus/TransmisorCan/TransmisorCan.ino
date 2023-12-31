@@ -58,8 +58,8 @@ class SensorAnalogico12562{// el nombre de la clase generalmente se escribe con 
       return datosBin[4];
     }
 };// */
-SensorAnalogico12562 Ejemplo1(A0,1);
-SensorAnalogico12562 Ejemplo2(A0,10);
+SensorAnalogico12562 Ejemplo1(A0,10);
+SensorAnalogico12562 Ejemplo2(A0,15);
 SensorAnalogico12562 Ejemplo3(A0,20);
 SensorAnalogico12562 Ejemplo4(A0,30);
 SensorAnalogico12562 Ejemplo5(A0,40);
@@ -92,11 +92,13 @@ void loop()
     Serial.print(analogRead(A0));
     Serial.println(" ]-----");
     mcp2515.sendMessage(&Ejemplo1.construirTrama());
+    /*
     mcp2515.sendMessage(&Ejemplo2.construirTrama());
     mcp2515.sendMessage(&Ejemplo3.construirTrama());
     mcp2515.sendMessage(&Ejemplo4.construirTrama());
     mcp2515.sendMessage(&Ejemplo5.construirTrama());
     mcp2515.sendMessage(&Ejemplo6.construirTrama());
     //*/
+    delay(250);
   }
 }
