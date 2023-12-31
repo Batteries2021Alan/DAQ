@@ -1,9 +1,11 @@
 /*
  * Ejemplo Receptor CAN
 */
+//----------------------------librerias----------------------------
 #include <SPI.h>
 #include <mcp2515.h>
 struct can_frame trama;
+struct can_frame Pedir;
 MCP2515 mcp2515(10);
 
 void setup() {
@@ -16,6 +18,11 @@ void setup() {
 }
 
 void loop() {
+  Pedir.can_id  = 0;           //CAN id as 0x036
+  Pedir.can_dlc = 1;               //CAN data length as 8
+  Pedir.data[0] = 1;
+  mcp2515.sendMessage(&Pedir);
+  delay(10);
   if (mcp2515.readMessage(&trama) == MCP2515::ERROR_OK) {
     switch (trama.can_id) {
       case 0x30:

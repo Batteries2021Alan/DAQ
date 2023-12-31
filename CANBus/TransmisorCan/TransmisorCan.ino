@@ -2,6 +2,7 @@
 #include <mcp2515.h>      //Librreria de can
 #include "SensorAnalogico12562.h"
 struct can_frame canMsg;
+struct can_frame Extraccion;
 const int analogPin = A0;
 MCP2515 mcp2515(10);
 unsigned long previousMillis = 0;
@@ -88,10 +89,42 @@ void loop()
   Serial.println("Mensaje enviado1");
   //*/
   //*
-  Serial.print("-----[ ");
+    Serial.print("-----[ ");
     Serial.print(analogRead(A0));
     Serial.println(" ]-----");
+    if (mcp2515.readMessage(&Extraccion) == MCP2515::ERROR_OK) {
+      if(Extraccion.can_id==0){
+      switch (Extraccion.data[0]) {
+        case 1:
+        Serial.print("entra 1 ");
+        mcp2515.sendMessage(&Ejemplo1.construirTrama());
+        break;
+        case 2:
+        mcp2515.sendMessage(&Ejemplo2.construirTrama());
+        Serial.print("entra 2 ");
+        break;
+        case 3:
+        mcp2515.sendMessage(&Ejemplo3.construirTrama());
+        break;
+        case 4:
+        mcp2515.sendMessage(&Ejemplo4.construirTrama());
+        break;
+        case 5:
+        mcp2515.sendMessage(&Ejemplo5.construirTrama());
+        break;
+        case 6:
+        mcp2515.sendMessage(&Ejemplo6.construirTrama());
+        break;
+        default:
 
+        break;
+      }
+    }
+    }
+    else{
+    //Serial.println("No entra");
+    }
+    /*
     mcp2515.sendMessage(&Ejemplo1.construirTrama());
     delay(30);
     mcp2515.sendMessage(&Ejemplo2.construirTrama());
@@ -104,6 +137,5 @@ void loop()
     delay(30);
     mcp2515.sendMessage(&Ejemplo6.construirTrama());
     //*/
-    delay(1000);
   }
 }
