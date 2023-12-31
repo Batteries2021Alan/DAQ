@@ -15,7 +15,7 @@ String token=",", cor1="[", cor2="]",sensor="Sensor";//Variables para la escritu
 String d1="";//Aqui se guardan los datos para pasar de entero a cadena
 //String tramas[50][7];//estas son el numero de celdas que se quieren usar pero no sirve
 LinkedList<String> DatosDeTramas=LinkedList<String>();//es una estructura de cadenas
-int numeroDeNodos=5;//cuantos nodos se planean tener
+int numeroDeNodos=2;//cuantos nodos se planean tener
 File Data;//Variable para un archivo
 
 struct can_frame trama;

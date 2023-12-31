@@ -131,7 +131,6 @@ void loop()
           Serial.println("Entra con 25");
         break;
       }
-      delay(100);
     }
     }
     else{
