@@ -15,7 +15,7 @@ float SensorAnalogico12562::leer(){
 struct can_frame SensorAnalogico12562::construirTrama(){
     arreglar();
     trama.can_id  = direccion;           //CAN id (Nomvre de la trama)
-    trama.can_dlc = 7;               //CAN data tamaño de la trama
+    trama.can_dlc = 8;               //CAN data tamaño de la trama
     trama.data[0] = datosBin[0];               //Valores maximo de 256
     trama.data[1] = datosBin[1];               //Valores maximo de 256
     trama.data[2] = datosBin[2];               //Valores maximo de 256
@@ -23,6 +23,7 @@ struct can_frame SensorAnalogico12562::construirTrama(){
     trama.data[4] = datosBin[4];
     trama.data[5] = datosBin[5];
     trama.data[6] = datosBin[6];
+    trama.data[7] = datosBin[7];
     /*Serial.print("-----[ ");
     Serial.print(datosBin[0]);
     Serial.println(" ]-----");*/
@@ -37,6 +38,7 @@ void SensorAnalogico12562::arreglar(){
     datosBin[2]=d3;
     datosBin[3]=d4;
     datosBin[4]=d5;
-    datosBin[5]=d1;
-    datosBin[6]=d1;
+    datosBin[5]=d6;
+    datosBin[6]=d7;
+    datosBin[7]=d8;
 }

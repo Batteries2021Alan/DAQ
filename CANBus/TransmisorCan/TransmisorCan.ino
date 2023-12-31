@@ -64,7 +64,7 @@ SensorAnalogico12562 Ejemplo2(A0,2);
 SensorAnalogico12562 Ejemplo3(A0,3);
 SensorAnalogico12562 Ejemplo4(A0,4);
 SensorAnalogico12562 Ejemplo5(A0,5);
-SensorAnalogico12562 Ejemplo6(A0,6);
+SensorAnalogico12562 Ejemplo6(A0,10);
 void setup() 
 {
   Serial.begin(9600);
@@ -87,16 +87,19 @@ void loop()
   canMsg.data[1] = 7;
   mcp2515.sendMessage(&canMsg);     //Sends the CAN message
   Serial.println("Mensaje enviado1");
-  //*/
-  //*
+  /*
     Serial.print("-----[ ");
     Serial.print(analogRead(A0));
     Serial.println(" ]-----");
+    */
     if (mcp2515.readMessage(&Extraccion) == MCP2515::ERROR_OK) {
-      if(Extraccion.can_id==0){
+      if(Extraccion.can_id==160){
       switch (Extraccion.data[0]) {
         case 1:
         Serial.print("entra 1 ");
+        Serial.print("[");
+        Serial.print(Extraccion.data[0]);
+        Serial.print("]");
         mcp2515.sendMessage(&Ejemplo1.construirTrama());
         break;
         case 2:
@@ -105,20 +108,30 @@ void loop()
         break;
         case 3:
         mcp2515.sendMessage(&Ejemplo3.construirTrama());
+        Serial.print("entra 3 ");
         break;
         case 4:
         mcp2515.sendMessage(&Ejemplo4.construirTrama());
+        Serial.print("entra 4 ");
         break;
         case 5:
         mcp2515.sendMessage(&Ejemplo5.construirTrama());
+        Serial.print("entra 5 ");
         break;
-        case 6:
+        case 10:
         mcp2515.sendMessage(&Ejemplo6.construirTrama());
+        Serial.println("entra 6 ");
         break;
-        default:
-
+        case 25:
+          canMsg.can_id  = 25;           //CAN id as 0x036
+          canMsg.can_dlc = 2;               //CAN data length as 8
+          canMsg.data[0] = 10;               //Update humidity value in [0]
+          canMsg.data[1] = 7;
+          mcp2515.sendMessage(&canMsg);     //Sends the CAN message
+          Serial.println("Entra con 25");
         break;
       }
+      delay(100);
     }
     }
     else{

@@ -12,7 +12,7 @@ void setup() {
   // put your setup code here, to run once:
   SPI.begin();
   mcp2515.reset();
-  mcp2515.setBitrate(CAN_250KBPS, MCP_8MHZ); 
+  mcp2515.setBitrate(CAN_1000KBPS, MCP_20MHZ); 
   mcp2515.setNormalMode();
   Serial.begin(9600);
 }
@@ -20,9 +20,9 @@ void setup() {
 void loop() {
   Pedir.can_id  = 0;           //CAN id as 0x036
   Pedir.can_dlc = 1;               //CAN data length as 8
-  Pedir.data[0] = 1;
+  Pedir.data[0] = 111;
   mcp2515.sendMessage(&Pedir);
-  delay(10);
+  delay(1);
   if (mcp2515.readMessage(&trama) == MCP2515::ERROR_OK) {
     switch (trama.can_id) {
       case 0x30:
@@ -84,7 +84,19 @@ void loop() {
         Serial.print("|");
         Serial.print(trama.data[0]);
         Serial.print("|");
-        Serial.println(trama.data[1]);
+        Serial.print(trama.data[1]);
+        Serial.print("|");
+        Serial.print(trama.data[2]);
+        Serial.print("|");
+        Serial.print(trama.data[3]);
+        Serial.print("|");
+        Serial.print(trama.data[4]);
+        Serial.print("|");
+        Serial.print(trama.data[5]);
+        Serial.print("|");
+        Serial.print(trama.data[6]);
+        Serial.print("|");
+        Serial.println(trama.data[7]);
       break;
     // statements
   }
