@@ -64,7 +64,7 @@ SensorAnalogico12562 Ejemplo2(A0,2);
 SensorAnalogico12562 Ejemplo3(A0,3);
 SensorAnalogico12562 Ejemplo4(A0,4);
 SensorAnalogico12562 Ejemplo5(A0,5);
-SensorAnalogico12562 Ejemplo6(A0,10);
+SensorAnalogico12562 Ejemplo6(A0,6);
 void setup() 
 {
   Serial.begin(9600);
@@ -118,7 +118,7 @@ void loop()
         mcp2515.sendMessage(&Ejemplo5.construirTrama());
         Serial.print("entra 5 ");
         break;
-        case 10:
+        case 6:
         mcp2515.sendMessage(&Ejemplo6.construirTrama());
         Serial.println("entra 6 ");
         break;
